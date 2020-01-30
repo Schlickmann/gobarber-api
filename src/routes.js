@@ -11,6 +11,6 @@ routes.post('/sessions', SessionController.store);
 routes.post('/users', UserController.store);
 
 routes.use(Auth.isUserAuthenticated);
-routes.put('/users/:id', UserController.update);
+routes.put('/users', UserController.update);
 
 export default routes;
