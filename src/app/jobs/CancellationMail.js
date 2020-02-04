@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import Mail from '../../lib/Mail';
 
 class CancellationMail {
@@ -10,6 +10,7 @@ class CancellationMail {
   async handle({ data }) {
     const { appointment } = data;
 
+    console.log('Queue started.');
     await Mail.sendMail({
       to: `${appointment.provider.name} <${appointment.provider.email}>`,
       subject: 'Appointment Canceled',
@@ -17,7 +18,7 @@ class CancellationMail {
       context: {
         provider: appointment.provider.name,
         user: appointment.user.name,
-        date: format(appointment.date, "MMMM dd, yyyy 'at' HH:mm'h'"),
+        date: format(parseISO(appointment.date), "MMMM dd, yyyy 'at' HH:mm'h'"),
       },
     });
   }
