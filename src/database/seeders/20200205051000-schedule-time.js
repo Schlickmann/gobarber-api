@@ -1,7 +1,7 @@
 module.exports = {
   up: QueryInterface => {
     return QueryInterface.bulkInsert(
-      'schedule',
+      'schedules',
       [
         {
           time: '08:00',

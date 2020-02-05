@@ -1,7 +1,7 @@
 module.exports = {
   up: QueryInterface => {
     return QueryInterface.bulkInsert(
-      'provider_schedule',
+      'provider_schedules',
       [
         {
           provider_id: 4,

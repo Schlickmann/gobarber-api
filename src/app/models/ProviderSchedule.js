@@ -1,8 +1,14 @@
-import { Model } from 'sequelize';
+import Sequelize, { Model } from 'sequelize';
 
 class ProviderSchedule extends Model {
   static init(sequelize) {
-    super.init({}, { sequelize });
+    super.init(
+      {
+        provider_id: Sequelize.INTEGER,
+        time_id: Sequelize.INTEGER,
+      },
+      { sequelize }
+    );
 
     return this;
   }

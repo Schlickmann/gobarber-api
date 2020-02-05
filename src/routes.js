@@ -41,6 +41,12 @@ routes.delete('/appointments/:id', AppointmentController.delete);
 // Provider schedule
 routes.get('/schedule', ScheduleController.index);
 
+/**
+ * CREATE ROUTE TO CRUD SCHEDULE (schedule table)
+ * CREATE ROUTE TO CRUD PROVIDER SCHEDULE (schedule table)
+ */
+// routes.post('/manage/schedule', ScheduleController.store);
+
 // Notification provider
 routes.get('/notifications', NotificationController.index);
 routes.put('/notifications/:id', NotificationController.update);
