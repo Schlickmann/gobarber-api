@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import express from 'express';
 import { resolve } from 'path';
 import Youch from 'youch';
@@ -9,8 +11,6 @@ import 'express-async-errors';
 import routes from './routes';
 
 import './database';
-
-require('dotenv').config();
 
 class App {
   constructor() {
