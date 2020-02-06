@@ -1,70 +1,59 @@
 module.exports = {
   up: QueryInterface => {
     return QueryInterface.bulkInsert(
-      'schedules',
+      'provider_schedules',
       [
         {
-          time: '08:00',
+          provider_id: 4,
+          time_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          time: '09:00',
+          provider_id: 4,
+          time_id: 2,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          time: '10:00',
+          provider_id: 4,
+          time_id: 5,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          time: '11:00',
+          provider_id: 4,
+          time_id: 6,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          time: '12:00',
+          provider_id: 4,
+          time_id: 7,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          time: '13:00',
+          provider_id: 4,
+          time_id: 8,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          time: '14:00',
+          provider_id: 4,
+          time_id: 9,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          time: '15:00',
+          provider_id: 4,
+          time_id: 10,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          time: '16:00',
-          created_at: new Date(),
-          updated_at: new Date(),
-        },
-        {
-          time: '17:00',
-          created_at: new Date(),
-          updated_at: new Date(),
-        },
-        {
-          time: '18:00',
-          created_at: new Date(),
-          updated_at: new Date(),
-        },
-        {
-          time: '19:00',
-          created_at: new Date(),
-          updated_at: new Date(),
-        },
-        {
-          time: '20:00',
+          provider_id: 4,
+          time_id: 11,
           created_at: new Date(),
           updated_at: new Date(),
         },
