@@ -1,4 +1,12 @@
-import { startOfDay, endOfDay } from 'date-fns';
+import {
+  startOfDay,
+  endOfDay,
+  setHours,
+  setMinutes,
+  setSeconds,
+  format,
+  isAfter,
+} from 'date-fns';
 import { Op } from 'sequelize';
 import Appointment from '../models/Appointment';
 import ProviderSchedule from '../models/ProviderSchedule';
@@ -29,7 +37,27 @@ class AvailableController {
       ],
     });
 
-    return res.json(schedule);
+    const available = schedule.map(element => {
+      const [hour, minute] = element.schedule.time.split(':');
+
+      // Formatting hour, minute and second
+      const value = setSeconds(
+        setMinutes(setHours(searchDate, hour), minute),
+        0
+      );
+
+      return {
+        time: element.schedule.time,
+        value: format(value, "yyyy-MM-dd'T'HH:mm:ssxxx"),
+        available:
+          isAfter(value, new Date()) &&
+          !appointments.find(
+            a => format(a.date, 'HH:mm') === element.schedule.time
+          ),
+      };
+    });
+
+    return res.json(available);
   }
 }
 
