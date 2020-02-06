@@ -37,6 +37,7 @@ class AvailableController {
       ],
     });
 
+    // Verifying provider's availability
     const available = schedule.map(element => {
       const [hour, minute] = element.schedule.time.split(':');
 
