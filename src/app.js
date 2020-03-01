@@ -1,7 +1,9 @@
 import 'dotenv/config';
 
-import express from 'express';
 import { resolve } from 'path';
+
+import express from 'express';
+import cors from 'cors';
 import Youch from 'youch';
 import * as Sentry from '@sentry/node';
 import sentryConfig from './config/sentry';
@@ -27,6 +29,7 @@ class App {
     // The request handler must be the first middleware on the app
     this.server.use(Sentry.Handlers.requestHandler());
 
+    this.server.use(cors());
     this.server.use(express.json());
     // serving static images
     this.server.use(
