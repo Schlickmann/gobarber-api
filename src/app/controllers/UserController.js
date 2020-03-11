@@ -35,13 +35,22 @@ class UserController {
       name: Yup.string(),
       email: Yup.string().email('Inform a valid email address'),
       oldPassword: Yup.string(),
-      password: Yup.string()
-        .min(6, 'Password needs to be at least 6 characters long')
-        .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
-        ),
+      password: Yup.string().when('oldPassword', (oldPassword, field) =>
+        oldPassword
+          ? field
+              .required('New password is required')
+              .min(6, 'Password needs to be at least 6 characters long')
+          : field
+      ),
       passwordConfirmation: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field
+        password
+          ? field
+              .required('Password Confirmation is required')
+              .oneOf(
+                [Yup.ref('password')],
+                'Password confirmation does not match'
+              )
+          : field
       ),
     });
 
