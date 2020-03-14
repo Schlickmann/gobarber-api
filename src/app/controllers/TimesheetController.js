@@ -11,7 +11,12 @@ class TimesheetController {
       ],
     });
 
-    return res.json(timesheet);
+    const schedule = timesheet.map(time => ({
+      id: time.schedule.id,
+      time: time.schedule.time,
+    }));
+
+    return res.json(schedule);
   }
 }
 
