@@ -11,6 +11,7 @@ import AppointmentController from './app/controllers/AppointmentController';
 import ScheduleController from './app/controllers/ScheduleController';
 import NotificationController from './app/controllers/NotificationController';
 import AvailableController from './app/controllers/AvailableController';
+import TimesheetController from './app/controllers/TimesheetController';
 
 import Auth from './app/middlewares/auth';
 
@@ -40,6 +41,7 @@ routes.delete('/appointments/:id', AppointmentController.delete);
 
 // Provider schedule
 routes.get('/schedule', ScheduleController.index);
+routes.get('/timesheet', TimesheetController.index);
 
 /**
  * CREATE ROUTE TO CRUD SCHEDULE (schedule table)
