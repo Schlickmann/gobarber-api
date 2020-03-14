@@ -50,6 +50,7 @@ class AvailableController {
       return {
         time: element.schedule.time,
         value: format(value, "yyyy-MM-dd'T'HH:mm:ssxxx"),
+        past: isAfter(new Date(), value),
         available:
           isAfter(value, new Date()) &&
           !appointments.find(
