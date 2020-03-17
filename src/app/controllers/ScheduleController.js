@@ -1,4 +1,4 @@
-import { startOfDay, endOfDay, parseISO } from 'date-fns';
+import { startOfDay, endOfDay } from 'date-fns';
 import { Op } from 'sequelize';
 import User from '../models/User';
 import File from '../models/File';
@@ -7,7 +7,7 @@ import Appointment from '../models/Appointment';
 class ScheduleController {
   async index(req, res) {
     const { page = 1, date } = req.query;
-    const parsedDate = parseISO(date);
+    const parsedDate = Number(date);
 
     const isProvider = await User.findOne({
       where: { id: req.userId, provider: true },
@@ -26,7 +26,7 @@ class ScheduleController {
         },
       },
       order: ['date'],
-      limit: page,
+      limit: 20,
       offset: (page - 1) * 20,
       attributes: ['id', 'date'],
       include: [
