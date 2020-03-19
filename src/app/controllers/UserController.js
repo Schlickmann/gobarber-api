@@ -1,3 +1,5 @@
+import fs from 'fs';
+import { resolve } from 'path';
 import * as Yup from 'yup';
 
 import User from '../models/User';
@@ -34,6 +36,7 @@ class UserController {
     const schema = Yup.object().shape({
       name: Yup.string(),
       email: Yup.string().email('Inform a valid email address'),
+      avatar_id: Yup.number(),
       oldPassword: Yup.string(),
       password: Yup.string().when('oldPassword', (oldPassword, field) =>
         oldPassword
@@ -60,9 +63,29 @@ class UserController {
       return res.status(400).json({ error: error.message });
     }
 
-    const { email, oldPassword } = req.body;
+    const { email, oldPassword, avatar_id } = req.body;
 
-    const user = await User.findByPk(req.userId);
+    const user = await User.findByPk(req.userId, {
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['path'],
+        },
+      ],
+    });
+
+    if (avatar_id && avatar_id !== user.avatar_id) {
+      console.log('Deleting old avatar');
+
+      const file = await File.findByPk(user.avatar_id);
+
+      await file.destroy();
+
+      fs.unlinkSync(
+        resolve(__dirname, '..', '..', '..', 'tmp', 'uploads', user.avatar.path)
+      );
+    }
 
     if (email && email !== user.email) {
       const userExists = await User.findOne({
