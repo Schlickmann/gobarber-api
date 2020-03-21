@@ -80,11 +80,21 @@ class UserController {
 
       const file = await File.findByPk(user.avatar_id);
 
-      await file.destroy();
+      if (file) {
+        await file.destroy();
 
-      fs.unlinkSync(
-        resolve(__dirname, '..', '..', '..', 'tmp', 'uploads', user.avatar.path)
-      );
+        fs.unlinkSync(
+          resolve(
+            __dirname,
+            '..',
+            '..',
+            '..',
+            'tmp',
+            'uploads',
+            user.avatar.path
+          )
+        );
+      }
     }
 
     if (email && email !== user.email) {
