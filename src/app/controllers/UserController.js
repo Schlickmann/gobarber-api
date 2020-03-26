@@ -76,8 +76,6 @@ class UserController {
     });
 
     if (avatar_id && avatar_id !== user.avatar_id) {
-      console.log('Deleting old avatar');
-
       const file = await File.findByPk(user.avatar_id);
 
       if (file) {
