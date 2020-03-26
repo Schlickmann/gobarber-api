@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-  GoBarber Web Application
+  GoBarber API
 </h3>
 
 <h4 align="center"> 
