@@ -86,10 +86,24 @@ class AppointmentController {
         .json({ error: 'Appointment date is not available.' });
     }
 
-    const appointment = await Appointment.create({
+    const { id } = await Appointment.create({
       user_id: req.userId,
       provider_id,
       date: hourStart,
+    });
+
+    const appointment = await Appointment.findByPk(id, {
+      attributes: ['id', 'past', 'cancelable', 'date'],
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['id', 'name'],
+          include: [
+            { model: File, as: 'avatar', attributes: ['id', 'path', 'url'] },
+          ],
+        },
+      ],
     });
 
     /**
