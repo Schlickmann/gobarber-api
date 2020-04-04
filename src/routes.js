@@ -45,6 +45,8 @@ routes.get('/schedule', ScheduleController.index);
 
 //  Timesheet
 routes.get('/timesheet', TimesheetController.index);
+
+//  Provider Timesheet
 routes.get('/provider/timesheet', ProviderTimesheetController.index);
 routes.post('/provider/timesheet', ProviderTimesheetController.store);
 routes.delete('/provider/timesheet/:id', ProviderTimesheetController.delete);
