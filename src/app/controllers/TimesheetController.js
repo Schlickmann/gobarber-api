@@ -1,20 +1,8 @@
-import ProviderSchedule from '../models/ProviderSchedule';
 import Schedule from '../models/Schedule';
 
 class TimesheetController {
   async index(req, res) {
-    const timesheet = await ProviderSchedule.findAll({
-      attributes: [],
-      where: { provider_id: req.userId },
-      include: [
-        { model: Schedule, as: 'schedule', attributes: ['id', 'time'] },
-      ],
-    });
-
-    const schedule = timesheet.map(time => ({
-      id: time.schedule.id,
-      time: time.schedule.time,
-    }));
+    const schedule = await Schedule.findAll();
 
     return res.json(schedule);
   }

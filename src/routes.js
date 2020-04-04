@@ -12,6 +12,7 @@ import ScheduleController from './app/controllers/ScheduleController';
 import NotificationController from './app/controllers/NotificationController';
 import AvailableController from './app/controllers/AvailableController';
 import TimesheetController from './app/controllers/TimesheetController';
+import ProviderTimesheetController from './app/controllers/ProviderTimesheetController';
 
 import Auth from './app/middlewares/auth';
 
@@ -41,13 +42,12 @@ routes.delete('/appointments/:id', AppointmentController.delete);
 
 // Provider schedule
 routes.get('/schedule', ScheduleController.index);
-routes.get('/timesheet', TimesheetController.index);
 
-/**
- * CREATE ROUTE TO CRUD SCHEDULE (schedule table)
- * CREATE ROUTE TO CRUD PROVIDER SCHEDULE (schedule table)
- */
-// routes.post('/manage/schedule', ScheduleController.store);
+//  Timesheet
+routes.get('/timesheet', TimesheetController.index);
+routes.get('/provider/timesheet', ProviderTimesheetController.index);
+routes.post('/provider/timesheet', ProviderTimesheetController.store);
+routes.delete('/provider/timesheet/:id', ProviderTimesheetController.delete);
 
 // Notification provider
 routes.get('/notifications', NotificationController.index);
