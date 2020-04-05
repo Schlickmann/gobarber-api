@@ -20,24 +20,28 @@ class ProviderTimesheetController {
   }
 
   async store(req, res) {
-    const { hours } = req.body;
+    const { time_id } = req.body;
 
-    if (!hours) {
+    if (!time_id) {
       return res.status(400).json({ error: 'Time was not provided.' });
     }
 
-    const bulkTime = hours.map(hour => ({ ...hour, provider_id: req.userId }));
+    const timeExist = await ProviderSchedule.findOne({
+      where: { time_id, provider_id: req.userId },
+    });
 
-    try {
-      const timesheet = await ProviderSchedule.bulkCreate(bulkTime);
-
-      return res.json(timesheet);
-    } catch (error) {
-      return res.status(401).json({
-        error:
-          'Action not permitted. You cannot add duplicated hours to your timesheet.',
-      });
+    if (timeExist) {
+      return res
+        .status(401)
+        .json({ error: "Time is already on provider's timesheet." });
     }
+
+    const timesheet = await ProviderSchedule.create({
+      provider_id: req.userId,
+      time_id,
+    });
+
+    return res.json(timesheet);
   }
 
   async delete(req, res) {
