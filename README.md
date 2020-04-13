@@ -48,7 +48,7 @@ This project was developed with the following technologies:
   - [GoBarber Web](https://github.com/Schlickmann/gobarber-webapp)
 - [Node.js](https://nodejs.org/en/) 
   - [GoBarber API](https://github.com/Schlickmann/gobarber-api)
-- [React Native](https://facebook.github.io/react-native/) in coming :construction:
+- [React Native](https://facebook.github.io/react-native/)
   - [GoBarber Mobile](https://github.com/Schlickmann/gobarber-app)
 
 ## 💻 Project
